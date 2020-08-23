@@ -1,5 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react'
-import shortid from 'shortid'
+import React, { Fragment, useEffect, useContext, useState } from 'react'
 import proyectoContext from '../../context/proyectos/proyectoContext'
 import tareaContext from '../../context/tareas/tareaContext'
 import { validarCampos } from '../helpers/validarCampos'
@@ -40,49 +39,48 @@ const FormTarea = () => {
 	const handleSubmit = e => {
 		e.preventDefault()
 		const task = validarCampos(tarea)
-		if(task.valid) {
-			if(tareaseleccionada === null) {
-				tarea.id = shortid.generate()
-				tarea.proyectoId = proyectoActual.id
-				tarea.estado = false
-				agregarTarea(tarea)
-			} else {
-				actualizarTarea(tarea)
-				limpiarTarea()
-			}
-			obtenerTareas(proyectoActual.id)
-			guardarTarea({nombre: ''})
+		if(!task.valid) validarTarea()
+		if(tareaseleccionada === null) {
+			tarea.proyecto = proyectoActual._id
+			agregarTarea(tarea)
 		} else {
-			validarTarea()
+			actualizarTarea(tarea)
+			limpiarTarea()
 		}
+		obtenerTareas(proyectoActual._id)
+		guardarTarea({nombre: ''})
 	}
 
 	return (
-		<div className={animateClass('fadeInRight') + "formulario"}>
-			<form onSubmit={handleSubmit} >
-				<div className="contenedor-input">
-					<input 
-						type="text" 
-						name="nombre" 
-						placeholder="Nombre de la tarea" 
-						className="input-text"
-						value={nombre}
-						onChange={handleChange}
-					/>
-				</div>
-				<div className="contenedor-input">
-					<input 
-						type="submit" 
-						className="btn btn-primario btn-submit btn-block"
-						value={tareaseleccionada ? "Editar tarea" : "Agregar tarea" }
-					/>
-				</div>
-			</form>
-			{
-				errortarea && 
-				<p className={animateClass('shakeY') + "mensaje error"}>La tarea es obligatoria</p>
-			}
-		</div>
+	  <Fragment>
+			<div className={animateClass('fadeInRight') + "formulario"}>
+				<form onSubmit={handleSubmit} >
+					<div className="contenedor-input">
+						<input 
+							type="text" 
+							name="nombre" 
+							placeholder="Nombre de la tarea" 
+							className="input-text"
+							value={nombre}
+							onChange={handleChange}
+						/>
+					</div>
+					<div className="contenedor-input">
+						<input 
+							type="submit" 
+							className="btn btn-primario btn-submit btn-block"
+							value={tareaseleccionada ? "Editar tarea" : "Agregar tarea" }
+						/>
+					</div>
+				</form>
+				{
+					errortarea && 
+					<p 
+						className={animateClass('shakeY') + "mensaje error"}
+					>La tarea es obligatoria</p>
+				}
+			</div>
+		</Fragment>
 	)
 }
 

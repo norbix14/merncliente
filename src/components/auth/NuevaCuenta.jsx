@@ -1,8 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { alertMsg } from '../helpers/alertMsg'
 import { validarCampos } from '../helpers/validarCampos'
+import ErrorDiv from '../error/Error'
+import AlertaContext from '../../context/alertas/alertaContext'
+import AuthContext from '../../context/auth/authContext'
 
-const NuevaCuenta = () => {
+const NuevaCuenta = props => {
+	const alertaContext = useContext(AlertaContext)
+	const authContext = useContext(AuthContext)
+
+	const { alerta, mostrarAlerta } = alertaContext
+	const { mensaje, autenticado, 
+					registrarUsuario } = authContext
+	
 	const [ usuario, guardarUsuario ] = useState({
 		nombre: '',
 		email: '',
@@ -22,19 +33,29 @@ const NuevaCuenta = () => {
 	const handleSubmit = e => {
 		e.preventDefault()
 		let registro = validarCampos(usuario)
-		if(registro.valid) {
-			if(usuario.password !== usuario.confirmar) {
-				console.log('las contraseñas no coinciden')
-			} else {
-				console.log(registro.msg)
-			}
-		} else {
-			console.warn(registro.msg)
+		if(!registro.valid) {
+			return mostrarAlerta(registro.msg, 'alerta-error')
 		}
+		if(usuario.password.length < 6) {
+			return mostrarAlerta(alertMsg.passLenErr, 'alerta-error')
+		}
+		if(usuario.password !== usuario.confirmar) {
+			return mostrarAlerta(alertMsg.passNotMatch, 'alerta-error')
+		}
+		registrarUsuario({ nombre, email, password })
 	}
+
+	useEffect(() => {
+		if(autenticado) props.history.push('/proyectos')
+		if(mensaje) mostrarAlerta(mensaje.msg, mensaje.categoria)
+		// eslint-disable-next-line
+	}, [mensaje, autenticado, props.history])
 
 	return (
 		<div className="form-usuario">
+			{
+				alerta && <ErrorDiv alerta={alerta} />
+			}
 			<div className="contenedor-form sombra-dark">
 				<h1>Crear cuenta</h1>
 				<form onSubmit={handleSubmit}>
@@ -46,6 +67,7 @@ const NuevaCuenta = () => {
 							id="nombre"
 							placeholder="Tu nombre"
 							autoComplete="off"
+							required
 							onChange={handleChange}
 							value={nombre}
 						/>
@@ -58,6 +80,7 @@ const NuevaCuenta = () => {
 							id="email"
 							placeholder="Tu email"
 							autoComplete="off"
+							required
 							onChange={handleChange}
 							value={email}
 						/>
@@ -70,6 +93,7 @@ const NuevaCuenta = () => {
 							id="password"
 							placeholder="Tu contraseña"
 							autoComplete="off"
+							required
 							onChange={handleChange}
 							value={password}
 						/>
@@ -82,6 +106,7 @@ const NuevaCuenta = () => {
 							id="confirmar"
 							placeholder="Confirmar contraseña"
 							autoComplete="off"
+							required
 							onChange={handleChange}
 							value={confirmar}
 						/>

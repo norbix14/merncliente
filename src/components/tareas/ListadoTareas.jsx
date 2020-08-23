@@ -15,9 +15,7 @@ const ListadoTareas = () => {
 
 	const [ proyectoActual ] = proyecto
 
-	const handleDelete = () => {
-		eliminarProyecto(proyectoActual.id)
-	}
+	const handleDelete = () => eliminarProyecto(proyectoActual._id)
 
 	return (
 	  <div className={animateClass('fadeInRight') + "contenedor-tareas"}>
@@ -27,7 +25,7 @@ const ListadoTareas = () => {
 					(tareasproyecto.length > 0) ? (
 						tareasproyecto.map(tarea => (
 					  	<Tarea 
-					  		key={tarea.id}
+					  		key={tarea._id}
 					  		tarea={tarea} 
 					  	/>
 						))

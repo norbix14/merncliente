@@ -94,15 +94,15 @@ a {
 }
 @media (min-width: 768px) {
   .contenedor-app {
-      display: flex;
-      min-height: 100vh;
+    display: flex;
+    min-height: 100vh;
   }
   aside {
-      background-color: var(--blanco);
-      flex: 0 0 300px;
+    background-color: var(--blanco);
+    flex: 0 0 300px;
   }
   .seccion-principal {
-      flex: 1;
+    flex: 1;
   }
 }
 
@@ -275,24 +275,24 @@ aside {
   transition: opacity 200ms;
 }
 .form-usuario {
-    background-color: var(--gris2);
-    height: 100vh;
-    min-height: 800px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: var(--gris2);
+  height: 100vh;
+  min-height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .contenedor-form {
-    padding: 5rem 3rem;
-    max-width: 500px;
-    width: 95%;
-    background-color: var(--blanco);
-    border-radius: 1rem;
+  padding: 5rem 3rem;
+  max-width: 500px;
+  width: 95%;
+  background-color: var(--blanco);
+  border-radius: 1rem;
 }
 .campo-form {
-    display: flex;
-    margin-bottom: 2rem;
-    align-items: center;
+  display: flex;
+  margin-bottom: 2rem;
+  align-items: center;
 }
 .campo-form:last-of-type {
   margin: 0;
@@ -328,10 +328,10 @@ aside {
 }
 @media (min-width: 768px) {
   .alerta {
-      width: auto;
-      top: 30px;
-      right: 10px;
-      left: auto;
+    width: auto;
+    top: 30px;
+    right: 10px;
+    left: auto;
   }
 }
 .alerta-ok {
@@ -341,4 +341,7 @@ aside {
 .alerta-error {
   background-color: var(--bg-alerta-error);
   color: var(--color-alerta-error);
+}
+.cerrar-sesion {
+  color: var(--blanco);
 }
