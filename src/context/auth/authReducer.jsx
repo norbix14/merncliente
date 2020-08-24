@@ -35,8 +35,9 @@ export default (state, action) => {
 			return {
 				...state,
 				autenticado: true,
-				usuario: payload,
-				cargando: false
+				cargando: false,
+				token: localStorage.getItem('token'),
+				usuario: payload
 			}
 		default:
 			return state

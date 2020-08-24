@@ -39,7 +39,7 @@ const FormTarea = () => {
 	const handleSubmit = e => {
 		e.preventDefault()
 		const task = validarCampos(tarea)
-		if(!task.valid) validarTarea()
+		if(!task.valid) return validarTarea()
 		if(tareaseleccionada === null) {
 			tarea.proyecto = proyectoActual._id
 			agregarTarea(tarea)
