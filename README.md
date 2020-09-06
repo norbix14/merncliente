@@ -1,21 +1,26 @@
-## MERN Tasks
+## MERN CLIENTE
 
-Hola! Este es un proyecto de un curso de Udemy <br/>
-El instructor es Juan Pablo de la Torre Valdez <br />
+Creación de proyectos y tareas para cada proyecto en React
 
-## Pasos y comandos utiles
+### [App](https://kind-darwin-cfafe0.netlify.app)
 
-### `git clone <repo>`
+## Pasos
 
-Clonar este repositorio
+Clonar repositorio
+
+### `git clone <repository> --branch <master> <directory>`
+
+Instala las dependencias necesarias
 
 ### `npm i`
 
-Instala todas las dependencias necesarias
+Ejecutar [App](http://localhost:3000)
 
-## `npm start`
+### `npm start`
 
-Para ejecutar la [App](http://localhost:3000)
+Crear el `build` de producción para desplegarlo en Netlify
+
+### `npm run build`
 
 ## Configuracion de la base de datos
 
