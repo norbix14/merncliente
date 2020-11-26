@@ -1,6 +1,8 @@
-# MERN [CLIENTE](https://kind-darwin-cfafe0.netlify.app)
+# MERN
 
-Creación de proyectos y tareas para cada proyecto en React
+Creación de proyectos y tareas en React
+
+Consume la **[API](https://github.com/norbix14/mernapi "MERN API")** en **`Node`**
 
 ## Snapshots
 
@@ -18,7 +20,7 @@ Clonar repositorio
 
 **`git clone <repository> --branch <master> <directory>`**
 
-Instala las dependencias necesarias
+Instalar las dependencias necesarias
 
 **`npm i`**
 
@@ -26,10 +28,10 @@ Ejecutar **[App](http://localhost:3000)** en modo de desarrollo
 
 **`npm start`**
 
-Crear el `build` de producción para desplegarlo en Netlify
+Crear el `build` de producción
 
 **`npm run build`**
 
-## Configuracion de la base de datos
+## Elementos necesarios
 
 Establecer la variable de entorno **REACT_APP_BACKEND_URL** con la ruta a la **API**
