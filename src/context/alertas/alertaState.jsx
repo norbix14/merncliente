@@ -1,43 +1,41 @@
-import React, { useReducer } from 'react'
+import { useReducer } from 'react'
+import PropTypes from 'prop-types'
 import alertaContext from './alertaContext'
 import alertaReducer from './alertaReducer'
-import {
-	MOSTRAR_ALERTA,
-	OCULTAR_ALERTA
-} from '../../types/'
+import { MOSTRAR_ALERTA, OCULTAR_ALERTA } from '../../types/'
 
-const AlertaState = props => {
-	const initialState = {
-		alerta: null
-	}
-	const [ state, dispatch ] = useReducer(alertaReducer, initialState)
+const AlertaState = (props) => {
+  const initialState = {
+    alerta: null,
+  }
+  const [state, dispatch] = useReducer(alertaReducer, initialState)
 
-	const mostrarAlerta = (msg, categoria) => {
-		dispatch({
-			type: MOSTRAR_ALERTA,
-			payload: { msg, categoria }
-		})
-		setTimeout(() => {
-			dispatch({
-				type: OCULTAR_ALERTA
-			})
-		}, 5000)
-	}
+  const mostrarAlerta = (msg, categoria) => {
+    dispatch({
+      type: MOSTRAR_ALERTA,
+      payload: { msg, categoria },
+    })
+    setTimeout(() => {
+      dispatch({
+        type: OCULTAR_ALERTA,
+      })
+    }, 5000)
+  }
 
-	return (
-		<alertaContext.Provider
-			value={
-				{
-					alerta: state.alerta,
-					mostrarAlerta
-				}
-			}
-		>
-			{
-				props.children
-			}
-		</alertaContext.Provider>
-	)
+  return (
+    <alertaContext.Provider
+      value={{
+        alerta: state.alerta,
+        mostrarAlerta,
+      }}
+    >
+      {props.children}
+    </alertaContext.Provider>
+  )
+}
+
+AlertaState.propTypes = {
+  children: PropTypes.any,
 }
 
 export default AlertaState

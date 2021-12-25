@@ -1,27 +1,29 @@
-import React, { useContext, useEffect } from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import AuthContext from '../../context/auth/authContext'
 
-const RutaPrivada = ({ component: Component, ...props }) => {
-	const authContext = useContext(AuthContext)
-	const { autenticado, cargando, 
-					getDatosUsuarioAutenticado } = authContext
+const RutaPrivada = ({ element: Component, ...props }) => {
+  const authContext = useContext(AuthContext)
+  const { autenticado, cargando, getDatosUsuarioAutenticado } = authContext
 
-	useEffect(() => {
-		getDatosUsuarioAutenticado()
-		// eslint-disable-next-line
-	}, [])
+  useEffect(() => {
+    getDatosUsuarioAutenticado()
+  }, [])
 
-	return (
-		<Route
-			{ ...props }
-			render={props => (!autenticado && !cargando) ? (
-				<Redirect to="/" />
-			) : (
-				<Component {...props} />
-			)}
-		/>
-	)
+  return (
+    <>
+      {!autenticado && !cargando ? (
+        <Navigate to="/" />
+      ) : (
+        <Component {...props} />
+      )}
+    </>
+  )
+}
+
+RutaPrivada.propTypes = {
+  element: PropTypes.any,
 }
 
 export default RutaPrivada

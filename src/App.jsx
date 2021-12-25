@@ -1,9 +1,4 @@
-import React from 'react'
-import {
-	BrowserRouter as Router, 
-	Switch, 
-	Route
-} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 /* Auth */
 import authToken from './config/authToken'
 /* Components */
@@ -16,40 +11,29 @@ import AuthState from './context/auth/authState'
 import ProyectoState from './context/proyectos/proyectoState'
 import TareaState from './context/tareas/tareaState'
 /* Higher Order Component */
-import RutaPrivada from './components/rutas/RutaPrivada'
+/* import RutaPrivada from './components/rutas/RutaPrivada' */
 
 const token = localStorage.getItem('token')
-if(token) authToken(token)
+if (token) authToken(token)
 
 const App = () => {
   return (
-	  <ProyectoState>
-	  	<TareaState>
-	  		<AlertaState>
-			    <AuthState>
-				    <Router>
-				      <Switch>
-				        <Route 
-				        	exact 
-				        	path="/" 
-				        	component={Login} 
-				        />
-				        <Route 
-				        	exact 
-				        	path="/nueva-cuenta" 
-				        	component={NuevaCuenta} 
-				        />
-				        <RutaPrivada 
-				        	exact 
-				        	path="/proyectos" 
-				        	component={Proyectos} 
-				        />
-				      </Switch>
-				    </Router>
-			    </AuthState>
-	  		</AlertaState>
-	  	</TareaState>
-	  </ProyectoState>
+    <ProyectoState>
+      <TareaState>
+        <AlertaState>
+          <AuthState>
+            <BrowserRouter>
+              <Routes>
+                <Route exact path="/" element={<Login />} />
+                <Route exact path="/nueva-cuenta" element={<NuevaCuenta />} />
+                <Route exact path="/proyectos" element={<Proyectos />} />
+                <Route path="*" element={<Login />} />
+              </Routes>
+            </BrowserRouter>
+          </AuthState>
+        </AlertaState>
+      </TareaState>
+    </ProyectoState>
   )
 }
 
